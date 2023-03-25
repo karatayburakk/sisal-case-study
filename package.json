@@ -1,19 +1,49 @@
 {
-  "name": "sisal-case-study",
-  "version": "1.0.0",
-  "description": "Sisal Case Study NodeJS - TypeScript",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/karatayburakk/sisal-case-study.git"
-  },
-  "author": "Burak Karatay",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/karatayburakk/sisal-case-study/issues"
-  },
-  "homepage": "https://github.com/karatayburakk/sisal-case-study#readme"
+	"name": "sisal-case-study",
+	"version": "1.0.0",
+	"description": "Sisal Case Study NodeJS - TypeScript",
+	"main": "app.js",
+	"scripts": {
+		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+		"compile": "tsc",
+		"start:dev": "tsc-watch --onSuccess \"node dist/app.js\"",
+		"start": "npm run compile && docker compose up"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/karatayburakk/sisal-case-study.git"
+	},
+	"author": "Burak Karatay",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/karatayburakk/sisal-case-study/issues"
+	},
+	"homepage": "https://github.com/karatayburakk/sisal-case-study#readme",
+	"devDependencies": {
+		"@types/bcryptjs": "^2.4.2",
+		"@types/express": "^4.17.17",
+		"@types/jsonwebtoken": "^9.0.1",
+		"@types/node": "^18.15.5",
+		"@types/nodemailer": "^6.4.7",
+		"@typescript-eslint/eslint-plugin": "^5.56.0",
+		"@typescript-eslint/parser": "^5.56.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-unused-imports": "^2.0.0",
+		"prettier": "^2.8.6",
+		"tsc-watch": "^6.0.0",
+		"typescript": "^5.0.2"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"class-transformer": "^0.5.1",
+		"class-validator": "^0.14.0",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.0",
+		"mysql2": "^3.2.0",
+		"nodemailer": "^6.9.1",
+		"reflect-metadata": "^0.1.13",
+		"typeorm": "^0.3.12"
+	}
 }
