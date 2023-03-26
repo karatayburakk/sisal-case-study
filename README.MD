@@ -5,6 +5,7 @@
 - To get JWT, user need to signup or signin. Use API 1 endpoints
 - There are also endpoints for API 1 to update password, forgot password and reset password
 - To use API endpoints, there are Posman API collection and swagger API documentation.
+- Postman API documentation: https://documenter.getpostman.com/view/13996544/2s93RNzFC3
 
 # To Start Application
 
