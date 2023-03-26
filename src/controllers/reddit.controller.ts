@@ -7,10 +7,10 @@ interface Post {
 }
 
 export const getTopPosts = catchAsync(async (req: Request, res: Response) => {
-	const response = await fetch('https://www.reddit.com/r/node/top.json');
-	const { data, message } = await response.json();
+	const subReddit = req.params.subReddit;
 
-	// console.log(data);
+	const response = await fetch(`https://www.reddit.com/r/${subReddit}/top.json`);
+	const { data, message } = await response.json();
 
 	if (!isDataAvailable(message)) {
 		return res.status(400).json({
@@ -23,10 +23,7 @@ export const getTopPosts = catchAsync(async (req: Request, res: Response) => {
 	const { posts, numberOfImages } = getPostsAndNumbOfImages(data.children);
 
 	if (numberOfImages === 0) {
-		return res.status(404).json({
-			status: 'fail',
-			message: 'Not Fund',
-		});
+		return res.status(404).send();
 	}
 
 	return res.status(200).json({

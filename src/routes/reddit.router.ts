@@ -4,6 +4,6 @@ import { protect } from '../controllers/auth.controller';
 
 const redditRouter: Router = Router();
 
-redditRouter.get('/top-posts', protect, redditController.getTopPosts);
+redditRouter.get('/top-posts/:subReddit', protect, redditController.getTopPosts);
 
 export { redditRouter };

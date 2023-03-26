@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { EntityNotFoundError, QueryFailedError } from 'typeorm';
+import { QueryFailedError } from 'typeorm';
 import { AppError } from './AppError';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
