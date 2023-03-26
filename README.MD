@@ -4,7 +4,7 @@
 - To use API 2, user should need to be authenticated from system (API 1) using JWT as Bearer Token.
 - To get JWT, user need to signup or signin. Use API 1 endpoints
 - There are also endpoints for API 1 to update password, forgot password and reset password
-- To use API endpoints, there are Posman API collection and swagger api documentation.
+- To use API endpoints, there are Posman API collection and swagger API documentation.
 
 # To Start Application
 
@@ -30,8 +30,8 @@
 
 # Dependencies:
 
-- bcryptjs - Password related jobs: Hash Password - Salt Password - Compare Hashed Password with given Password
-- class-transformer and class validator: To use DTO (Data Transfer Object)
+- bcryptjs: Password related jobs: Hash Password - Salt Password - Compare Hashed Password with given Password
+- class-transformer and class-validator: To use DTO (Data Transfer Object)
 - dotenv: To configure .env file with application
 - express: Web Application Framework For building APIs
 - jsonwebtoken: To Create JWT and send it to user
@@ -39,3 +39,14 @@
 - nodemailer: To send emails to users for forgot password or reset password
 - reflect-metadata: to use experimentalDecorators and emitDecoratorMetadata
 - typeorm: ORM for NodeJS applicaiton.
+
+# DevDependencies
+
+- @types/bcryptjs: Type Definitions for bcryptjs package
+- @types/express: Type Definitions for express package
+- @types/jsonwebtoken: Type Definitions for jsonwebtoken package
+- @types/node: Type Definitions for node package
+- @types/nodemailer: Type Definitions for nodemailer package
+- @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint-config-prettier, eslint-plugin-prettier, eslint-plugin-unused-imports, prettier: static code analysis tools for identifying problematic patterns and code formatter
+- tsc-watch: Starts TypeScript Compiler with watch parameter, with the ability to react to compilation status.
+- typescript: Strict syntactical superset of JavaScript and adds optional static typing to the language
