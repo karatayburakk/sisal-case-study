@@ -8,9 +8,12 @@ import { globalErrorHandler } from './utils/global-error-handler';
 import { AppDataSource } from './data-source';
 import { AppError } from './utils/AppError';
 import { redditRouter } from './routes/reddit.router';
+import morgan from 'morgan';
 
 const app = express();
+app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.APP_PORT ? +process.env.APP_PORT : 9000;
 
