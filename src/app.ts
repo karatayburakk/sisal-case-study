@@ -41,7 +41,6 @@ async function startApp(): Promise<void> {
 
 	app.listen(port, () => {
 		console.log(`App is now running at http://locahost:${port}`);
-		console.log(`Api Docs are available at http://localhost:${port}/docs`);
 	});
 }
 
