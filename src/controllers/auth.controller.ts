@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import * as userService from '../services/user.service';
 import { genSalt, hash, compare } from 'bcryptjs';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { SigninDto, SignupDto } from '../dtos/auth';
@@ -18,12 +19,7 @@ export const signup = catchAsync(async (req: Request, res: Response): Promise<Re
 	const hashPassword = await encryptPassword(payload.password);
 	delete payload.password;
 
-	const user = userRepository.create({
-		password: hashPassword,
-		email: payload.email,
-	});
-
-	await userRepository.insert(user);
+	const user = await userService.create({ email: payload.email, password: hashPassword });
 
 	const token = generateToken(user.id);
 
@@ -41,7 +37,7 @@ export const signin = catchAsync(async (req: Request, res: Response): Promise<Re
 
 	const { email, password } = payload;
 
-	const user = await userRepository.findOneBy({ email });
+	const user = await userService.findByEmail(email);
 
 	if (!user) throw new AppError('Username or Password is incorrect', 400);
 
@@ -57,13 +53,16 @@ export const signin = catchAsync(async (req: Request, res: Response): Promise<Re
 
 export const updatePassword = catchAsync(async (req: Request, res: Response): Promise<Response> => {
 	const { password, passwordConfirm } = req.body;
+	const userId = req.userId;
+
+	if (!userId) throw new AppError('User should be authenticated!', 400);
 
 	if (!password || !passwordConfirm || !isPasswordsMatch(password, passwordConfirm))
 		throw new AppError('Please provide password and passwordConfirm', 400);
 
 	const hashPassword = await encryptPassword(password);
 
-	await userRepository.update({ id: req.userId }, { password: hashPassword });
+	await userService.updatePasswordById(userId, hashPassword);
 
 	return res.status(200).json({
 		status: 'success',
@@ -75,7 +74,8 @@ export const forgotPassword = catchAsync(async (req: Request, res: Response): Pr
 	const { email } = req.body;
 	if (!email) throw new AppError('Pleave provide an email', 400);
 
-	const user = await userRepository.findOneBy({ email });
+	const user = await userService.findByEmail(email);
+
 	if (!user) throw new AppError('No user for given email', 404);
 
 	const resetPasswordToken = generatePasswordToken(email);
@@ -106,7 +106,7 @@ export const resetPassword = catchAsync(async (req: Request, res: Response): Pro
 
 	const decoded = decodeToken(token);
 
-	await userRepository.update({ email: decoded.email }, { password: hashPassword });
+	await userService.updatePasswordByEmail(decoded.email, hashPassword);
 
 	return res.status(200).json({
 		status: 'success',
