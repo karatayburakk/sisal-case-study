@@ -117,7 +117,7 @@ export const resetPassword = catchAsync(async (req: Request, res: Response): Pro
 export const protect = catchAsync(
 	async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer'))
-			throw new AppError('Unauthrozied!', 401);
+			throw new AppError('Unauthrozied!', 403);
 
 		const token = req.headers.authorization.split(' ')[1];
 
@@ -125,7 +125,7 @@ export const protect = catchAsync(
 
 		const user = await userRepository.findOneBy({ id: decoded.id });
 
-		if (!user) throw new AppError('User with this token no longer exist!', 401);
+		if (!user) throw new AppError('User with this token no longer exist!', 403);
 
 		req.userId = user.id;
 

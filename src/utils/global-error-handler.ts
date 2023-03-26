@@ -16,6 +16,10 @@ export const globalErrorHandler = (err: any, req: Request, res: Response, _next:
 
 	// App Errors
 	if (err.constructor.name === AppError.name) {
+		if (err.statusCode === 403) {
+			return res.status(err.statusCode).send();
+		}
+
 		return res.status(err.statusCode).json({
 			status: err.status,
 			message: err.message,
