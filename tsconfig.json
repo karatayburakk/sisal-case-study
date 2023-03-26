@@ -20,13 +20,15 @@
 		"strictNullChecks": true /* When type checking, take into account 'null' and 'undefined'. */,
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */,
 
-		"declaration": true,
+		"declaration": false,
 		"removeComments": true,
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
-		"sourceMap": true,
+		"sourceMap": false,
 		"baseUrl": "./",
 		"strictBindCallApply": false,
-		"typeRoots": ["./types"]
-	}
+		"typeRoots": ["./types", "./node_modules/@types"]
+	},
+	"include": ["src/**/*", "./types/index.d.ts"],
+	"exclude": ["node_modules", "dist"]
 }
